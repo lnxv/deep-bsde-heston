@@ -1,0 +1,129 @@
+% ---------------- Figure: error landscape and decomposition ----------------
+\newcommand{\figLandscape}{%
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.6cm, vertical sep=2.1cm},
+  width=0.47\textwidth, height=0.36\textwidth, xmin=0.05, xmax=0.85, xtick={0.1,0.2,...,0.8}, xlabel={vol-of-vol $\sv$}, grid=major, grid style={gray!20}]
+\nextgroupplot[ylabel={total error (\%)}, title={(a) total error $(\hat Y_0-u)/u$}, legend to name=dleg, legend columns=5]
+\draw[gray, dashed] (axis cs:0.4,-10) -- (axis cs:0.4,10);
+\addplot+[dcol1, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=tot, y error=totsd]{gen-e1_d1.dat};
+\addplot+[dcol2, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=tot, y error=totsd]{gen-e1_d2.dat};
+\addplot+[dcol5, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=tot, y error=totsd]{gen-e1_d5.dat};
+\addplot+[dcol10, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=tot, y error=totsd]{gen-e1_d10.dat};
+\addplot+[dcol20, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=tot, y error=totsd]{gen-e1_d20.dat};
+\legend{$d=1$,$d=2$,$d=5$,$d=10$,$d=20$}
+\nextgroupplot[ylabel={bias (\%)}, title={(b) discretization bias $(u^{40}_{\mathrm{PT}}-u)/u$}]
+\draw[gray, dashed] (axis cs:0.4,-10) -- (axis cs:0.4,10);
+\addplot+[dcol1, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=bias, y error=biasse]{gen-e1_d1.dat};
+\addplot+[dcol2, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=bias, y error=biasse]{gen-e1_d2.dat};
+\addplot+[dcol5, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=bias, y error=biasse]{gen-e1_d5.dat};
+\addplot+[dcol10, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=bias, y error=biasse]{gen-e1_d10.dat};
+\addplot+[dcol20, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=bias, y error=biasse]{gen-e1_d20.dat};
+\nextgroupplot[ylabel={solver error (\%)}, title={(c) solver error $(\hat Y_0-u^{40}_{\mathrm{PT}})/u$}, ymin=-0.4, ymax=0.4]
+\draw[gray, dashed] (axis cs:0.4,-10) -- (axis cs:0.4,10);
+\addplot+[dcol1, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=solver, y error=solversd]{gen-e1_d1.dat};
+\addplot+[dcol2, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=solver, y error=solversd]{gen-e1_d2.dat};
+\addplot+[dcol5, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=solver, y error=solversd]{gen-e1_d5.dat};
+\addplot+[dcol10, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=solver, y error=solversd]{gen-e1_d10.dat};
+\addplot+[dcol20, error bars/.cd, y dir=both, y explicit] table[x=sigma, y=solver, y error=solversd]{gen-e1_d20.dat};
+\nextgroupplot[ylabel={variance reduction}, title={(d) hedge: $1-\mathbb E[(Y_N-g)^2]/\mathrm{Var}[g]$}]
+\draw[gray, dashed] (axis cs:0.4,-10) -- (axis cs:0.4,10);
+\addplot+[dcol1] table[x=sigma, y=hvr]{gen-e1_d1.dat};
+\addplot+[dcol2] table[x=sigma, y=hvr]{gen-e1_d2.dat};
+\addplot+[dcol5] table[x=sigma, y=hvr]{gen-e1_d5.dat};
+\addplot+[dcol10] table[x=sigma, y=hvr]{gen-e1_d10.dat};
+\addplot+[dcol20] table[x=sigma, y=hvr]{gen-e1_d20.dat};
+\end{groupplot}
+\end{tikzpicture}\\[2pt]
+\ref{dleg}
+\caption{Main experiment (PT scheme, $N=40$, $\kappa=2$, independent assets). Error bars are $\pm1$ standard deviation over seeds (5 seeds for $d\le5$, 3 for $d\ge10$) in (a) and (c), and $\pm1$ Monte Carlo standard error in (b). The dashed line marks the Feller threshold $\sv^*=0.4$. Almost all of the total error (a) is discretization bias (b), which can be measured without any neural network. The solver error (c) stays small and shows no systematic trend with $\sv$. Hedge quality (d) degrades with both $\sv$ and $d$.}
+\label{fig:landscape}
+\end{figure}}
+
+% ---------------- Figure: Feller shift ----------------
+\newcommand{\figFeller}{%
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.7cm}, width=0.47\textwidth, height=0.38\textwidth, grid=major, grid style={gray!20}]
+\nextgroupplot[xlabel={vol-of-vol $\sv$}, ylabel={bias of PT, $N=40$ (\%)}, title={(a) bias vs.\ $\sv$, $d=1$}, legend pos=north west, xmin=0.05, xmax=1.05]
+\addplot[black, mark=*, mark size=1.2pt] table[x=sigma, y=pt]{gen-e2_d1_k1.dat};
+\addplot[blue!70!black, mark=square*, mark size=1.2pt] table[x=sigma, y=pt]{gen-e2_d1_k2.dat};
+\addplot[red!75!black, mark=triangle*, mark size=1.5pt] table[x=sigma, y=pt]{gen-e2_d1_k4.dat};
+\addplot[only marks, mark=o, mark size=2.6pt, green!50!black, thick] table[x=sigma, y=tot]{gen-e2bsde_k1.dat};
+\addplot[only marks, mark=o, mark size=2.6pt, green!50!black, thick, forget plot] table[x=sigma, y=tot]{gen-e2bsde_k2.dat};
+\addplot[only marks, mark=o, mark size=2.6pt, green!50!black, thick, forget plot] table[x=sigma, y=tot]{gen-e2bsde_k4.dat};
+\draw[black, dashed] (axis cs:0.2828,-1) -- (axis cs:0.2828,3);
+\draw[blue!70!black, dashed] (axis cs:0.4,-1) -- (axis cs:0.4,3);
+\draw[red!75!black, dashed] (axis cs:0.5657,-1) -- (axis cs:0.5657,3);
+\legend{$\kappa=1$ ($\sv^*{=}0.28$),$\kappa=2$ ($\sv^*{=}0.40$),$\kappa=4$ ($\sv^*{=}0.57$),Deep BSDE total error}
+\nextgroupplot[xmode=log, xlabel={Feller ratio $\nu=2\kappa\theta/\sv^2$}, ylabel={bias$/\sv^2$ (\%)}, title={(b) normalized bias vs.\ $\nu$}, legend pos=north east, ymin=-0.2, xmin=0.07, xmax=1.8]
+\addplot[black, mark=*, mark size=1.2pt] table[x=feller, y=nb]{gen-e2n_d1_k1.dat};
+\addplot[blue!70!black, mark=square*, mark size=1.2pt] table[x=feller, y=nb]{gen-e2n_d1_k2.dat};
+\addplot[red!75!black, mark=triangle*, mark size=1.5pt] table[x=feller, y=nb]{gen-e2n_d1_k4.dat};
+\addplot[black, dashed, mark=*, mark options={solid}, mark size=1pt] table[x=feller, y=nb]{gen-e2n_d5_k1.dat};
+\addplot[blue!70!black, dashed, mark=square*, mark options={solid}, mark size=1pt] table[x=feller, y=nb]{gen-e2n_d5_k2.dat};
+\addplot[red!75!black, dashed, mark=triangle*, mark options={solid}, mark size=1.2pt] table[x=feller, y=nb]{gen-e2n_d5_k4.dat};
+\draw[gray] (axis cs:1,-1) -- (axis cs:1,3);
+\legend{{$d{=}1,\kappa{=}1$},{$d{=}1,\kappa{=}2$},{$d{=}1,\kappa{=}4$},{$d{=}5,\kappa{=}1$},{$d{=}5,\kappa{=}2$},{$d{=}5,\kappa{=}4$}}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Moving the Feller threshold. (a) Bias of the PT scheme with $N=40$ (lines; at least $8\cdot10^6$ paths per point, against the exact Heston price) and the total error of the trained Deep BSDE solver (circles; mean over 3 to 5 seeds) for $d=1$ and $\kappa\in\{1,2,4\}$. Dashed vertical lines mark each $\sv^*=\sqrt{2\kappa\theta}$. (b) The same biases divided by $\sv^2$ and plotted against the Feller ratio $\nu$, for $d=1$ (solid) and $d=5$ (dashed). Only points with $\nu\le1.6$ are shown; for larger $\nu$ the bias is within Monte Carlo noise and dividing by a small $\sv^2$ only amplifies that noise. For each $d$, the curves for different $\kappa$ approximately collapse onto a single curve.}
+\label{fig:feller}
+\end{figure}}
+
+% ---------------- Figure: time steps ----------------
+\newcommand{\figSteps}{%
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.7cm}, width=0.47\textwidth, height=0.37\textwidth, xmode=log, log basis x=2, xtick={10,20,40,80,160}, xticklabels={10,20,40,80,160}, xlabel={number of time steps $N$}, grid=major, grid style={gray!20}]
+\nextgroupplot[ylabel={error (\%)}, title={(a) $d=1$}, legend pos=north east]
+\addplot[red!75!black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d1_s0.7_PT.dat};
+\addplot[red!75!black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d1_s0.7_FT.dat};
+\addplot[blue!70!black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d1_s0.5_PT.dat};
+\addplot[blue!70!black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d1_s0.5_FT.dat};
+\addplot[black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d1_s0.3_PT.dat};
+\addplot[black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d1_s0.3_FT.dat};
+\addplot[only marks, red!75!black, mark=o, mark size=2.8pt, thick] table[x=N, y=tot]{gen-e3bsde_d1_s0.7_PT.dat};
+\addplot[only marks, red!75!black, mark=diamond, mark size=3pt, thick] table[x=N, y=tot]{gen-e3bsde_d1_s0.7_FT.dat};
+\legend{PT $\sv{=}0.7$,FT $\sv{=}0.7$,PT $\sv{=}0.5$,FT $\sv{=}0.5$,PT $\sv{=}0.3$,FT $\sv{=}0.3$,BSDE PT $0.7$,BSDE FT $0.7$}
+\nextgroupplot[ylabel={error (\%)}, title={(b) $d=5$}]
+\addplot[red!75!black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d5_s0.7_PT.dat};
+\addplot[red!75!black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d5_s0.7_FT.dat};
+\addplot[blue!70!black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d5_s0.5_PT.dat};
+\addplot[blue!70!black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d5_s0.5_FT.dat};
+\addplot[black, mark=*, mark size=1.2pt] table[x=N, y=bias]{gen-e3_d5_s0.3_PT.dat};
+\addplot[black, dashed, mark=x, mark size=2pt] table[x=N, y=bias]{gen-e3_d5_s0.3_FT.dat};
+\addplot[only marks, red!75!black, mark=o, mark size=2.8pt, thick] table[x=N, y=tot]{gen-e3bsde_d5_s0.7_PT.dat};
+\addplot[only marks, red!75!black, mark=diamond, mark size=3pt, thick] table[x=N, y=tot]{gen-e3bsde_d5_s0.7_FT.dat};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Discretization bias against the number of time steps for the PT scheme (solid) and the FT scheme (dashed), measured by Monte Carlo against the true price, together with the total error of trained Deep BSDE solvers at $\sv=0.7$ (open markers; mean over 3 to 5 seeds). The bias decays roughly like $1/N$. The trained solvers track the bias curve of the scheme they were trained on.}
+\label{fig:steps}
+\end{figure}}
+
+% ---------------- Figure: dimension and correlation ----------------
+\newcommand{\figDim}{%
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=1.7cm}, width=0.47\textwidth, height=0.37\textwidth, xmode=log, xtick={1,2,5,10,20}, xticklabels={1,2,5,10,20}, xlabel={number of assets $d$}, grid=major, grid style={gray!20}]
+\nextgroupplot[ylabel={error at $\sv=0.7$ (\%)}, title={(a) total error and bias, $\sv=0.7$}, legend pos=north east]
+\addplot[red!75!black, mark=*, mark size=1.3pt, error bars/.cd, y dir=both, y explicit] table[x=d, y=tot, y error=totsd]{gen-e1_bys0.7.dat};
+\addplot[red!75!black, dashed] table[x=d, y=bias]{gen-e1_bys0.7.dat};
+\addplot[blue!70!black, mark=square*, mark size=1.3pt, error bars/.cd, y dir=both, y explicit] table[x=d, y=tot, y error=totsd]{gen-e5_s0.7.dat};
+\addplot[blue!70!black, dashed] table[x=d, y=bias]{gen-e5_s0.7.dat};
+\legend{{total, $\rho_S{=}0$},{bias, $\rho_S{=}0$},{total, $\rho_S{=}0.5$},{bias, $\rho_S{=}0.5$}}
+\nextgroupplot[ylabel={variance reduction}, title={(b) hedge quality}, legend pos=south west]
+\addplot[red!75!black, mark=*, mark size=1.3pt] table[x=d, y=hvr]{gen-e1_bys0.7.dat};
+\addplot[red!75!black, dashed, mark=*, mark options={solid}, mark size=1.3pt] table[x=d, y=hvr]{gen-e1_bys0.3.dat};
+\addplot[blue!70!black, mark=square*, mark size=1.3pt] table[x=d, y=hvr]{gen-e5_s0.7.dat};
+\addplot[blue!70!black, dashed, mark=square*, mark options={solid}, mark size=1.3pt] table[x=d, y=hvr]{gen-e5_s0.3.dat};
+\legend{$\rho_S{=}0$; $\sv{=}0.7$,$\rho_S{=}0$; $\sv{=}0.3$,$\rho_S{=}0.5$; $\sv{=}0.7$,$\rho_S{=}0.5$; $\sv{=}0.3$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Effect of the number of assets and of inter-asset correlation $\rho_S$. (a) Total error of the Deep BSDE price (solid; $\pm1$ s.d.\ over seeds) and discretization bias (dashed) at $\sv=0.7$. (b) Hedge variance reduction at $\sv\in\{0.3,0.7\}$. For $\rho_S=0.5$ the reference is the FT scheme with $N=400$, whose own bias is at most $0.05\%$ at $d=1$ (Section~\ref{sec:refs}).}
+\label{fig:dim}
+\end{figure}}

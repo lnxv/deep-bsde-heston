@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l rr rr r}
+\toprule
+ & \multicolumn{2}{c}{$d=2$} & \multicolumn{2}{c}{$d=10$} & $d=10,\ \sv{=}0.7$\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}
+Variant & $\sv=0.3$ & $\sv=0.7$ & $\sv=0.3$ & $\sv=0.7$ & var.\ red.\\
+\midrule
+Baseline ($N{=}40$, width $d{+}10$, 2 layers, 4k it., $M{=}256$) & 0.03\,{\scriptsize(0.01)} & 0.32\,{\scriptsize(0.04)} & 0.02\,{\scriptsize(0.12)} & 0.02\,{\scriptsize(0.10)} & 0.724\\
+Wider (width $4(d{+}10)$) & $-$0.02\,{\scriptsize(0.06)} & 0.32\,{\scriptsize(0.08)} & $-$0.05\,{\scriptsize(0.00)} & 0.15\,{\scriptsize(0.20)} & 0.774\\
+Deeper (3 hidden layers) & 0.01\,{\scriptsize(0.07)} & 0.32\,{\scriptsize(0.09)} & $-$0.03\,{\scriptsize(0.09)} & 0.22\,{\scriptsize(0.20)} & 0.697\\
+Longer training (10k iterations) & $-$0.03\,{\scriptsize(0.07)} & 0.25\,{\scriptsize(0.07)} & $-$0.10\,{\scriptsize(0.22)} & 0.05\,{\scriptsize(0.09)} & 0.812\\
+Larger batch ($M=1024$) & $-$0.04\,{\scriptsize(0.00)} & 0.28\,{\scriptsize(0.02)} & $-$0.02\,{\scriptsize(0.06)} & 0.14\,{\scriptsize(0.07)} & 0.858\\
+Monte Carlo warm start of $Y_0$ & $-$0.01\,{\scriptsize(0.08)} & 0.26\,{\scriptsize(0.13)} & $-$0.04\,{\scriptsize(0.03)} & 0.27\,{\scriptsize(0.14)} & 0.721\\
+More time steps ($N=80$) & $-$0.07\,{\scriptsize(0.05)} & 0.11\,{\scriptsize(0.03)} & 0.05\,{\scriptsize(0.02)} & 0.09\,{\scriptsize(0.12)} & 0.675\\
+FT scheme instead of PT & 0.01\,{\scriptsize(0.05)} & 0.28\,{\scriptsize(0.04)} & 0.01\,{\scriptsize(0.07)} & 0.01\,{\scriptsize(0.08)} & 0.717\\
+\bottomrule
+\end{tabular}
+\caption{Ablations. Entries are the total pricing error in \% (mean over 3 seeds, with the standard deviation in parentheses; the baseline row uses the 5 or 3 seeds of the main experiment). The last column is the hedge variance reduction. Only changing the time discretization moves the pricing error systematically. Network capacity, training length and batch size improve the hedge but not the price.}
+\label{tab:ablation}
+\end{table}

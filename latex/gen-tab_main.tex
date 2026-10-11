@@ -1,0 +1,40 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{rrrrrrrrr}
+\toprule
+ & \multicolumn{8}{c}{vol-of-vol $\sv$ (bold: Feller violated, $\sv>0.4$)}\\
+$d$ & 0.1 & 0.2 & 0.3 & 0.4 & \textbf{0.5} & \textbf{0.6} & \textbf{0.7} & \textbf{0.8}\\
+\midrule
+\multicolumn{9}{l}{\emph{(a) Total error $(\hat Y_0-u)/u$, \%: mean over seeds (standard deviation)}}\\
+1 & 0.01\,{\scriptsize(0.05)} & 0.01\,{\scriptsize(0.03)} & 0.02\,{\scriptsize(0.04)} & 0.01\,{\scriptsize(0.02)} & 0.02\,{\scriptsize(0.08)} & 0.22\,{\scriptsize(0.06)} & 0.36\,{\scriptsize(0.05)} & 0.69\,{\scriptsize(0.08)}\\
+2 & $-$0.03\,{\scriptsize(0.06)} & 0.01\,{\scriptsize(0.06)} & 0.03\,{\scriptsize(0.01)} & $-$0.03\,{\scriptsize(0.04)} & 0.04\,{\scriptsize(0.04)} & 0.16\,{\scriptsize(0.08)} & 0.32\,{\scriptsize(0.04)} & 0.57\,{\scriptsize(0.04)}\\
+5 & $-$0.02\,{\scriptsize(0.05)} & $-$0.03\,{\scriptsize(0.05)} & $-$0.02\,{\scriptsize(0.04)} & $-$0.01\,{\scriptsize(0.09)} & 0.03\,{\scriptsize(0.06)} & 0.12\,{\scriptsize(0.09)} & 0.20\,{\scriptsize(0.09)} & 0.43\,{\scriptsize(0.09)}\\
+10 & $-$0.04\,{\scriptsize(0.03)} & 0.00\,{\scriptsize(0.12)} & 0.02\,{\scriptsize(0.12)} & $-$0.02\,{\scriptsize(0.18)} & 0.08\,{\scriptsize(0.13)} & 0.05\,{\scriptsize(0.22)} & 0.02\,{\scriptsize(0.10)} & 0.28\,{\scriptsize(0.01)}\\
+20 & $-$0.02\,{\scriptsize(0.03)} & 0.03\,{\scriptsize(0.07)} & 0.00\,{\scriptsize(0.02)} & $-$0.04\,{\scriptsize(0.37)} & $-$0.10\,{\scriptsize(0.12)} & 0.09\,{\scriptsize(0.05)} & 0.13\,{\scriptsize(0.18)} & 0.22\,{\scriptsize(0.13)}\\
+\midrule
+\multicolumn{9}{l}{\emph{(b) Discretization bias $(u^{40}_{\mathrm{PT}}-u)/u$, \%, measured by Monte Carlo without any network (MC std.\ error)}}\\
+1 & $-$0.03\,{\scriptsize(0.01)} & $-$0.02\,{\scriptsize(0.01)} & 0.00\,{\scriptsize(0.01)} & 0.03\,{\scriptsize(0.01)} & 0.06\,{\scriptsize(0.01)} & 0.18\,{\scriptsize(0.01)} & 0.40\,{\scriptsize(0.01)} & 0.69\,{\scriptsize(0.01)}\\
+2 & $-$0.03\,{\scriptsize(0.01)} & $-$0.02\,{\scriptsize(0.01)} & 0.00\,{\scriptsize(0.01)} & $-$0.03\,{\scriptsize(0.01)} & 0.06\,{\scriptsize(0.01)} & 0.14\,{\scriptsize(0.01)} & 0.30\,{\scriptsize(0.01)} & 0.54\,{\scriptsize(0.01)}\\
+5 & $-$0.04\,{\scriptsize(0.01)} & $-$0.03\,{\scriptsize(0.01)} & $-$0.01\,{\scriptsize(0.01)} & $-$0.02\,{\scriptsize(0.01)} & 0.02\,{\scriptsize(0.01)} & 0.11\,{\scriptsize(0.01)} & 0.22\,{\scriptsize(0.01)} & 0.41\,{\scriptsize(0.01)}\\
+10 & $-$0.04\,{\scriptsize(0.02)} & $-$0.03\,{\scriptsize(0.02)} & $-$0.01\,{\scriptsize(0.02)} & $-$0.03\,{\scriptsize(0.02)} & 0.01\,{\scriptsize(0.02)} & 0.08\,{\scriptsize(0.02)} & 0.16\,{\scriptsize(0.02)} & 0.32\,{\scriptsize(0.02)}\\
+20 & $-$0.03\,{\scriptsize(0.01)} & $-$0.03\,{\scriptsize(0.01)} & $-$0.03\,{\scriptsize(0.01)} & $-$0.02\,{\scriptsize(0.01)} & $-$0.01\,{\scriptsize(0.01)} & 0.03\,{\scriptsize(0.01)} & 0.10\,{\scriptsize(0.01)} & 0.21\,{\scriptsize(0.01)}\\
+\midrule
+\multicolumn{9}{l}{\emph{(c) Solver error $(\hat Y_0-u^{40}_{\mathrm{PT}})/u$, \%: mean over seeds}}\\
+1 & 0.04 & 0.03 & 0.02 & $-$0.02 & $-$0.04 & 0.04 & $-$0.04 & 0.00\\
+2 & 0.00 & 0.03 & 0.04 & $-$0.01 & $-$0.02 & 0.02 & 0.02 & 0.03\\
+5 & 0.02 & 0.00 & 0.00 & 0.01 & 0.01 & 0.01 & $-$0.02 & 0.01\\
+10 & $-$0.01 & 0.03 & 0.03 & 0.02 & 0.07 & $-$0.03 & $-$0.14 & $-$0.03\\
+20 & 0.01 & 0.06 & 0.03 & $-$0.02 & $-$0.08 & 0.06 & 0.03 & 0.01\\
+\midrule
+\multicolumn{9}{l}{\emph{(d) Reference price $u$ (exact for $d=1$; QE Monte Carlo for $d>1$)}}\\
+1 & 6.900 & 6.882 & 6.836 & 6.762 & 6.665 & 6.551 & 6.428 & 6.301\\
+2 & 5.300 & 5.284 & 5.260 & 5.230 & 5.192 & 5.151 & 5.105 & 5.054\\
+5 & 3.919 & 3.909 & 3.896 & 3.883 & 3.867 & 3.851 & 3.836 & 3.819\\
+10 & 3.265 & 3.259 & 3.250 & 3.242 & 3.233 & 3.224 & 3.215 & 3.206\\
+20 & 2.851 & 2.846 & 2.842 & 2.837 & 2.832 & 2.827 & 2.822 & 2.817\\
+\bottomrule
+\end{tabular}
+\caption{Main experiment: Deep BSDE with the PT scheme and $N=40$ time steps, $\kappa=2$, independent assets. Five seeds for $d\le5$ and three for $d\ge10$. By construction (a) $=$ (b) $+$ (c), up to the Monte Carlo error of the references.}
+\label{tab:main}
+\end{table}

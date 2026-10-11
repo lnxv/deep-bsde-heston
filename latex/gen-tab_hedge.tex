@@ -1,0 +1,32 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{rrrrrrrrr}
+\toprule
+$d$ & 0.1 & 0.2 & 0.3 & 0.4 & \textbf{0.5} & \textbf{0.6} & \textbf{0.7} & \textbf{0.8}\\
+\midrule
+\multicolumn{9}{l}{\emph{(a) Initial delta: mean absolute relative error vs.\ reference delta, \%}}\\
+1 & 0.35 & 0.24 & 0.30 & 0.11 & 0.26 & 0.20 & 0.31 & 0.37\\
+2 & 0.29 & 0.26 & 0.15 & 0.19 & 0.21 & 0.22 & 0.35 & 0.36\\
+5 & 0.27 & 0.24 & 0.29 & 0.28 & 0.58 & 0.46 & 0.19 & 0.13\\
+10 & 0.26 & 0.44 & 0.45 & 0.79 & 1.22 & 0.61 & 0.89 & 0.83\\
+20 & 0.43 & 0.42 & 0.30 & 1.10 & 1.03 & 0.90 & 1.00 & 1.63\\
+\midrule
+\multicolumn{9}{l}{\emph{(b) Replication: variance reduction $1-\mathbb E[(Y_N-g)^2]/\mathrm{Var}[g]$ on fresh paths}}\\
+1 & 0.993 & 0.992 & 0.991 & 0.989 & 0.987 & 0.984 & 0.981 & 0.977\\
+2 & 0.993 & 0.991 & 0.989 & 0.986 & 0.982 & 0.977 & 0.974 & 0.969\\
+5 & 0.990 & 0.985 & 0.978 & 0.966 & 0.952 & 0.932 & 0.918 & 0.899\\
+10 & 0.987 & 0.971 & 0.937 & 0.888 & 0.828 & 0.772 & 0.724 & 0.687\\
+20 & 0.977 & 0.954 & 0.903 & 0.839 & 0.765 & 0.688 & 0.634 & 0.574\\
+\midrule
+\multicolumn{9}{l}{\emph{(c) Relative RMS replication error $\sqrt{\mathbb E[(Y_N-g)^2]}/\hat Y_0$, \%}}\\
+1 & 11.4 & 11.6 & 12.1 & 12.7 & 13.2 & 14.2 & 15.1 & 16.1\\
+2 & 11.0 & 11.6 & 12.6 & 14.0 & 15.3 & 16.5 & 17.5 & 18.7\\
+5 & 11.9 & 14.3 & 16.7 & 20.3 & 23.4 & 27.7 & 29.9 & 32.5\\
+10 & 11.9 & 17.8 & 25.8 & 33.7 & 41.1 & 47.0 & 51.1 & 53.6\\
+20 & 13.9 & 19.7 & 28.4 & 36.0 & 42.5 & 48.4 & 52.1 & 55.4\\
+\bottomrule
+\end{tabular}
+\caption{Hedge quality in the main experiment, averaged over seeds. The reference delta is analytic for $d=1$ and a pathwise Monte Carlo estimate (QE scheme) for $d>1$. Replication statistics use 8{,}192 fresh paths per run.}
+\label{tab:hedge}
+\end{table}

@@ -1,0 +1,23 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\newcommand{\sv}{\sigma_v}
+\pgfplotsset{
+  every axis/.append style={font=\footnotesize, tick label style={font=\scriptsize}, label style={font=\footnotesize}, legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.85, text opacity=1}},
+  dcol1/.style={color=black, mark=*, mark size=1.4pt},
+  dcol2/.style={color=blue!70!black, mark=square*, mark size=1.3pt},
+  dcol5/.style={color=green!50!black, mark=triangle*, mark size=1.6pt},
+  dcol10/.style={color=orange!85!black, mark=diamond*, mark size=1.6pt},
+  dcol20/.style={color=red!75!black, mark=pentagon*, mark size=1.5pt},
+}
